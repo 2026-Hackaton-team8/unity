@@ -1,0 +1,73 @@
+using UnityEngine;
+
+public sealed class ModelHierarchyController : MonoBehaviour
+{
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private ModelFocusController focusController;
+    [SerializeField] private HierarchyPanelView hierarchyPanel;
+
+    private Transform currentModelRoot;
+
+    private void Awake()
+    {
+        if (spawnPoint == null)
+            spawnPoint = transform;
+
+        if (focusController == null)
+            focusController = FindFirstObjectByType<ModelFocusController>();
+        if (hierarchyPanel == null)
+            hierarchyPanel = FindFirstObjectByType<HierarchyPanelView>();
+
+        if (hierarchyPanel == null)
+            hierarchyPanel = HierarchyPanelView.Create(FocusHierarchyNode);
+        else
+            hierarchyPanel.Initialize(FocusHierarchyNode);
+    }
+
+    private void LateUpdate()
+    {
+        Transform modelRoot = FindActiveModelRoot();
+        if (modelRoot == currentModelRoot)
+            return;
+
+        currentModelRoot = modelRoot;
+        hierarchyPanel.SetModel(modelRoot);
+
+        if (focusController != null)
+            focusController.SetModelRoot(modelRoot);
+    }
+
+    private Transform FindActiveModelRoot()
+    {
+        if (spawnPoint == null)
+            return null;
+
+        for (int i = 0; i < spawnPoint.childCount; i++)
+        {
+            Transform child = spawnPoint.GetChild(i);
+            if (child.gameObject.activeInHierarchy
+                && (child.gameObject.hideFlags & HideFlags.HideInHierarchy) == 0)
+                return child;
+        }
+
+        return null;
+    }
+
+    private void FocusHierarchyNode(Transform target)
+    {
+        if (focusController != null)
+            focusController.FocusOn(target);
+    }
+
+    public void SelectFromWorld(Transform target)
+    {
+        if (target == null || currentModelRoot == null)
+            return;
+
+        if (target != currentModelRoot && !target.IsChildOf(currentModelRoot))
+            return;
+
+        hierarchyPanel.SelectTarget(target);
+        FocusHierarchyNode(target);
+    }
+}
