@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using Unity.Cinemachine.TargetTracking;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CinemachineOrbitalFollow))]
@@ -88,7 +89,9 @@ public class ModelViewerCamera : MonoBehaviour
 
         // 스크롤 휠: 확대 및 축소
         float scroll = mouse.scroll.ReadValue().y;
-        if (Mathf.Abs(scroll) > 0.01f)
+        EventSystem eventSystem = EventSystem.current;
+        bool pointerOverUi = eventSystem != null && eventSystem.IsPointerOverGameObject();
+        if (Mathf.Abs(scroll) > 0.01f && !pointerOverUi)
         {
             orbit.RadialAxis.Value = Mathf.Clamp(
                 orbit.RadialAxis.Value - scroll * zoomSpeed,
