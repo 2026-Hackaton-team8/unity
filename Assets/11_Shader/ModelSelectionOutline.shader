@@ -11,7 +11,7 @@ Shader "SWHack/Model Selection Outline"
         Tags
         {
             "RenderPipeline" = "UniversalPipeline"
-            "Queue" = "Transparent+10"
+            "Queue" = "Overlay"
             "RenderType" = "Transparent"
         }
 
@@ -21,7 +21,17 @@ Shader "SWHack/Model Selection Outline"
             Tags { "LightMode" = "SRPDefaultUnlit" }
             Cull Front
             ZWrite Off
-            ZTest LEqual
+            ZTest Always
+            Stencil
+            {
+                Ref 128
+                ReadMask 128
+                WriteMask 0
+                Comp NotEqual
+                Pass Keep
+                Fail Keep
+                ZFail Keep
+            }
             Blend SrcAlpha OneMinusSrcAlpha
 
             HLSLPROGRAM
