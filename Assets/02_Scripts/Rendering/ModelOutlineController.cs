@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 public sealed class ModelOutlineController : MonoBehaviour
 {
     [SerializeField] private Material outlineMaterial;
+    [SerializeField] private Material outlineMaskMaterial;
 
     private readonly List<GameObject> outlineObjects = new List<GameObject>();
 
@@ -14,9 +15,9 @@ public sealed class ModelOutlineController : MonoBehaviour
         if (target == null)
             return;
 
-        if (outlineMaterial == null)
+        if (outlineMaterial == null || outlineMaskMaterial == null)
         {
-            Debug.LogWarning("ModelOutlineController needs an outline material.", this);
+            Debug.LogWarning("ModelOutlineController needs outline and silhouette-mask materials.", this);
             return;
         }
 
@@ -53,19 +54,36 @@ public sealed class ModelOutlineController : MonoBehaviour
 
     private void CreateOutlineProxy(Renderer sourceRenderer, Mesh mesh)
     {
-        Transform sourceTransform = sourceRenderer.transform;
-        var outlineObject = new GameObject(
-            sourceRenderer.name + " Selection Outline",
+        GameObject maskObject = CreateProxy(
+            sourceRenderer,
+            mesh,
+            outlineMaskMaterial,
+            " Selection Outline Mask");
+        GameObject outlineObject = CreateProxy(
+            sourceRenderer,
+            mesh,
+            outlineMaterial,
+            " Selection Outline");
+
+        outlineObjects.Add(maskObject);
+        outlineObjects.Add(outlineObject);
+    }
+
+    private static GameObject CreateProxy(Renderer sourceRenderer, Mesh mesh, Material material, string suffix)
+    {
+        var proxy = new GameObject(
+            sourceRenderer.name + suffix,
             typeof(MeshFilter),
             typeof(MeshRenderer));
-        outlineObject.hideFlags = HideFlags.HideInHierarchy;
-        outlineObject.transform.SetParent(sourceTransform, false);
+        proxy.hideFlags = HideFlags.HideInHierarchy;
+        proxy.layer = LayerMask.NameToLayer("Ignore Raycast");
+        proxy.transform.SetParent(sourceRenderer.transform, false);
 
-        MeshFilter filter = outlineObject.GetComponent<MeshFilter>();
+        MeshFilter filter = proxy.GetComponent<MeshFilter>();
         filter.sharedMesh = mesh;
 
-        MeshRenderer outlineRenderer = outlineObject.GetComponent<MeshRenderer>();
-        outlineRenderer.sharedMaterial = outlineMaterial;
+        MeshRenderer outlineRenderer = proxy.GetComponent<MeshRenderer>();
+        outlineRenderer.sharedMaterial = material;
         outlineRenderer.shadowCastingMode = ShadowCastingMode.Off;
         outlineRenderer.receiveShadows = false;
         outlineRenderer.lightProbeUsage = LightProbeUsage.Off;
@@ -73,6 +91,6 @@ public sealed class ModelOutlineController : MonoBehaviour
         outlineRenderer.sortingLayerID = sourceRenderer.sortingLayerID;
         outlineRenderer.sortingOrder = sourceRenderer.sortingOrder;
 
-        outlineObjects.Add(outlineObject);
+        return proxy;
     }
 }
