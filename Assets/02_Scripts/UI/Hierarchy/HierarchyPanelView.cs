@@ -137,6 +137,35 @@ public sealed class HierarchyPanelView : MonoBehaviour
         scrollRect.inertia = true;
         scrollRect.scrollSensitivity = 28f;
 
+        RectTransform scrollbarRect = CreateRect("Vertical Scrollbar", scrollObject);
+        scrollbarRect.anchorMin = new Vector2(1f, 0f);
+        scrollbarRect.anchorMax = Vector2.one;
+        scrollbarRect.pivot = new Vector2(1f, 0.5f);
+        scrollbarRect.anchoredPosition = Vector2.zero;
+        scrollbarRect.sizeDelta = new Vector2(12f, 0f);
+
+        UnityEngine.UI.Image scrollbarTrack = scrollbarRect.gameObject.AddComponent<UnityEngine.UI.Image>();
+        scrollbarTrack.color = new Color(1f, 1f, 1f, 0.12f);
+        scrollbarTrack.raycastTarget = true;
+
+        UnityEngine.UI.Scrollbar verticalScrollbar = scrollbarRect.gameObject.AddComponent<UnityEngine.UI.Scrollbar>();
+        verticalScrollbar.direction = UnityEngine.UI.Scrollbar.Direction.BottomToTop;
+
+        RectTransform slidingArea = CreateRect("Sliding Area", scrollbarRect);
+        slidingArea.anchorMin = Vector2.zero;
+        slidingArea.anchorMax = Vector2.one;
+        slidingArea.offsetMin = new Vector2(2f, 2f);
+        slidingArea.offsetMax = new Vector2(-2f, -2f);
+
+        RectTransform handle = CreateRect("Handle", slidingArea);
+        Stretch(handle);
+        UnityEngine.UI.Image handleImage = handle.gameObject.AddComponent<UnityEngine.UI.Image>();
+        handleImage.color = new Color(0.86f, 0.88f, 0.92f, 0.8f);
+        handleImage.raycastTarget = true;
+
+        verticalScrollbar.handleRect = handle;
+        verticalScrollbar.targetGraphic = handleImage;
+
         viewport = CreateRect("Viewport", scrollObject);
         Stretch(viewport);
         Image viewportImage = viewport.gameObject.AddComponent<Image>();
@@ -165,6 +194,9 @@ public sealed class HierarchyPanelView : MonoBehaviour
         fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         scrollRect.viewport = viewport;
         scrollRect.content = content;
+        scrollRect.verticalScrollbar = verticalScrollbar;
+        scrollRect.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHideAndExpandViewport;
+        scrollRect.verticalScrollbarSpacing = 2f;
 
         emptyMessage = CreateText("Empty Message", content, "Select a model to show its hierarchy.", 13f, FontStyles.Normal);
         emptyMessage.color = new Color(0.74f, 0.77f, 0.82f, 1f);
