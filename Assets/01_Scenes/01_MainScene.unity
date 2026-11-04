@@ -838,8 +838,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51007f2a35534c00a85ce1009aa1798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModelViewerCamera
-  rotateSpeed: 0.2
-  zoomSpeed: 0.002
+  rotateSpeed: 1
+  zoomSpeed: 0.02
   minZoom: 0.4
   maxZoom: 3
   orbit: {fileID: 1700456848}
@@ -850,7 +850,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700456843}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89875cdc57c54474a8a74efd9b2a3b5d, type: 3}
   m_Name: 
