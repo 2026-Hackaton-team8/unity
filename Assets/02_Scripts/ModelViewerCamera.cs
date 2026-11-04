@@ -12,6 +12,9 @@ public class ModelViewerCamera : MonoBehaviour
 
     [SerializeField] private CinemachineOrbitalFollow orbit;
 
+    private bool isRotating;
+    private bool cursorWasVisible;
+
     private void Awake()
     {
         if (!orbit)
@@ -26,11 +29,22 @@ public class ModelViewerCamera : MonoBehaviour
     private void Input()
     {
         Mouse mouse = Mouse.current;
-        if (mouse == null || !orbit) return;
+        if (!Application.isFocused || mouse == null || !orbit)
+        {
+            RestoreCursor();
+            return;
+        }
 
         // 좌클릭 드래그: 카메라 회전
         if (mouse.leftButton.isPressed)
         {
+            if (!isRotating)
+            {
+                isRotating = true;
+                cursorWasVisible = Cursor.visible;
+                Cursor.visible = false;
+            }
+
             Vector2 delta = mouse.delta.ReadValue();
 
             orbit.HorizontalAxis.Value += delta.x * rotateSpeed;
@@ -39,6 +53,10 @@ public class ModelViewerCamera : MonoBehaviour
                 orbit.VerticalAxis.Value - delta.y * rotateSpeed,
                 -89f, 89f
             );
+        }
+        else
+        {
+            RestoreCursor();
         }
 
         // 마우스 휠: 확대 및 축소
@@ -51,5 +69,24 @@ public class ModelViewerCamera : MonoBehaviour
                 minZoom, maxZoom
             );
         }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+            RestoreCursor();
+    }
+
+    private void OnDisable()
+    {
+        RestoreCursor();
+    }
+
+    private void RestoreCursor()
+    {
+        if (!isRotating) return;
+
+        Cursor.visible = cursorWasVisible;
+        isRotating = false;
     }
 }
