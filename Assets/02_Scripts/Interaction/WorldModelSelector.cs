@@ -148,7 +148,7 @@ public sealed class WorldModelSelector : MonoBehaviour
             meshCollider = renderer.gameObject.AddComponent<MeshCollider>();
             meshCollider.sharedMesh = filter.sharedMesh;
             meshCollider.convex = false;
-            meshCollider.isTrigger = true;
+            meshCollider.isTrigger = false;
             return meshCollider;
         }
         catch (UnityException exception)
