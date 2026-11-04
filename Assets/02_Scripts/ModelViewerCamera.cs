@@ -9,7 +9,7 @@ public class ModelViewerCamera : MonoBehaviour
     [SerializeField] private float rotateSpeed = 1f;
     [SerializeField] private float panSpeed = 1f;
     [SerializeField] private float zoomSpeed = 0.02f;
-    [SerializeField] private float minZoom = 0.4f;
+    [SerializeField] private float minZoom = 0.1f;
     [SerializeField] private float maxZoom = 3f;
 
     [SerializeField] private CinemachineOrbitalFollow orbit;
@@ -125,6 +125,18 @@ public class ModelViewerCamera : MonoBehaviour
         Transform lookAtTarget = aim.LookAtTarget;
         if (lookAtTarget != null)
             aim.TargetOffset = initialAimOffset + lookAtTarget.InverseTransformVector(panOffsetWorld);
+    }
+
+    public void ResetPanForFocus()
+    {
+        RestorePanDamping();
+        panOffsetWorld = Vector3.zero;
+
+        if (orbit != null)
+            orbit.TargetOffset = initialOrbitOffset;
+
+        if (aim != null)
+            aim.TargetOffset = initialAimOffset;
     }
 
     private void DisablePanDamping()
