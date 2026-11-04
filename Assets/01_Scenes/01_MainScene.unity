@@ -1510,6 +1510,7 @@ GameObject:
   - component: {fileID: 1700456844}
   - component: {fileID: 2074938211}
   - component: {fileID: 2074938212}
+  - component: {fileID: 2074938219}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -2176,6 +2177,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7a918860ab44a29080766181b27319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HierarchyPanelView
+--- !u!114 &2074938219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700456843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881be66a0c224a4198493fcdef0bab61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldModelSelector
+  spawnPoint: {fileID: 1849953263}
+  hierarchyController: {fileID: 2074938210}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
