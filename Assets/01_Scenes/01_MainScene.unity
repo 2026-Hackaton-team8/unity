@@ -2062,6 +2062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModelOutlineController
   outlineMaterial: {fileID: 2100000, guid: 7e9d6090ba6a4ac98e95875b865752da, type: 2}
+  outlineMaskMaterial: {fileID: 2100000, guid: d318e74a064b464c85c78ddace2d4f35, type: 2}
 --- !u!1 &2074938213
 GameObject:
   m_ObjectHideFlags: 0
