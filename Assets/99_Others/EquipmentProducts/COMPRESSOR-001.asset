@@ -15,4 +15,28 @@ MonoBehaviour:
   productId: COMPRESSOR-001
   productName: 컴프레서
   modelPrefab: {fileID: 7216159204498100851, guid: 3a71e6a7eb8f34d9ca0331dfe4bf1034, type: 3}
-  parts: []
+  parts:
+  - partId: "COMPRESSOR-001:AIR_PIPE"
+    partName: 공기 배관
+    modelPath: PART_AIR_PIPE
+  - partId: "COMPRESSOR-001:AIR_TANK"
+    partName: 공기 저장 탱크
+    modelPath: PART_AIR_TANK
+  - partId: "COMPRESSOR-001:COMPRESSOR_HEAD"
+    partName: 압축기 헤드
+    modelPath: PART_COMPRESSOR_HEAD
+  - partId: "COMPRESSOR-001:CONTROL_BOX"
+    partName: 제어 박스
+    modelPath: PART_CONTROL_BOX
+  - partId: "COMPRESSOR-001:COOLING_FAN"
+    partName: 냉각 팬
+    modelPath: PART_COOLING_FAN
+  - partId: "COMPRESSOR-001:MOTOR"
+    partName: 전동 모터
+    modelPath: PART_MOTOR
+  - partId: "COMPRESSOR-001:PRESSURE_GAUGE"
+    partName: 압력계
+    modelPath: PART_PRESSURE_GAUGE
+  - partId: "COMPRESSOR-001:SAFETY_VALVE"
+    partName: 안전 밸브
+    modelPath: PART_SAFETY_VALVE
