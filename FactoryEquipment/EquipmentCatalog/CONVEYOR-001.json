@@ -1,0 +1,38 @@
+{
+  "equipmentCode": "CONVEYOR-001",
+  "name": "컨베이어",
+  "parts": [
+    {
+      "partCode": "CONVEYOR-001-BELT",
+      "name": "컨베이어 벨트"
+    },
+    {
+      "partCode": "CONVEYOR-001-CONTROL_BOX",
+      "name": "제어 박스"
+    },
+    {
+      "partCode": "CONVEYOR-001-DRIVE_MOTOR",
+      "name": "구동 모터"
+    },
+    {
+      "partCode": "CONVEYOR-001-DRIVE_ROLLER",
+      "name": "구동 롤러"
+    },
+    {
+      "partCode": "CONVEYOR-001-FRAME",
+      "name": "지지 프레임"
+    },
+    {
+      "partCode": "CONVEYOR-001-IDLER_ROLLER",
+      "name": "종동 롤러"
+    },
+    {
+      "partCode": "CONVEYOR-001-SENSOR",
+      "name": "감지 센서"
+    },
+    {
+      "partCode": "CONVEYOR-001-SUPPORT_LEG",
+      "name": "지지 다리"
+    }
+  ]
+}
