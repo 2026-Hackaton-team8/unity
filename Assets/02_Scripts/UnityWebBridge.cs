@@ -4,7 +4,6 @@ using TMPro;
 
 public class UnityWebBridge : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private SelectModel selectModel;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -21,9 +20,6 @@ public class UnityWebBridge : MonoBehaviour
     public void SetEquipment(string modelName)
     {
         ResolveSelectModel();
-
-        if (text != null)
-            text.text = $"설비 모델: {modelName}";
 
         Debug.Log($"React에서 받은 모델 이름: {modelName}");
 
