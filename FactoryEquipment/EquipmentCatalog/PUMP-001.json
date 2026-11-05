@@ -1,0 +1,38 @@
+{
+  "equipmentCode": "PUMP-001",
+  "name": "펌프",
+  "parts": [
+    {
+      "partCode": "PUMP-001-BASE_PLATE",
+      "name": "설치 베이스"
+    },
+    {
+      "partCode": "PUMP-001-COUPLING",
+      "name": "커플링"
+    },
+    {
+      "partCode": "PUMP-001-ELECTRIC_MOTOR",
+      "name": "전동 모터"
+    },
+    {
+      "partCode": "PUMP-001-IMPELLER",
+      "name": "임펠러"
+    },
+    {
+      "partCode": "PUMP-001-INLET_PIPE",
+      "name": "흡입 배관"
+    },
+    {
+      "partCode": "PUMP-001-OUTLET_PIPE",
+      "name": "토출 배관"
+    },
+    {
+      "partCode": "PUMP-001-PUMP_CASING",
+      "name": "펌프 케이싱"
+    },
+    {
+      "partCode": "PUMP-001-SHAFT",
+      "name": "회전축"
+    }
+  ]
+}
