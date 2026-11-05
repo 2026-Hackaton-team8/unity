@@ -8,7 +8,8 @@ public static class FactoryEquipmentAssetSetup
 {
     private static readonly string[] EquipmentIds =
     {
-        "ROBOT-001", "CNC-001", "CONVEYOR-001", "PRESS-001", "COMPRESSOR-001", "PUMP-001"
+        "ROBOT-001", "CNC-001", "CONVEYOR-001", "PRESS-001", "COMPRESSOR-001", "PUMP-001",
+        "PUMP-002", "WASHER-001", "BLOWER-001"
     };
 
     private const string ModelFolder = "Assets/05_Models";
@@ -44,6 +45,108 @@ public static class FactoryEquipmentAssetSetup
             "Factory equipment",
             $"Created {created} of {EquipmentIds.Length} materials and prefabs. See the Console for details.",
             "OK");
+    }
+
+    private static readonly string[] AdditionalEquipmentIds = { "PUMP-002", "WASHER-001", "BLOWER-001" };
+    private const string ProductDataFolder = "Assets/99_Others/EquipmentProducts";
+
+    [MenuItem("Assets/Factory Equipment/Create Additional Product Data")]
+    private static void CreateAdditionalProductData()
+    {
+        EnsureFolderExists(ProductDataFolder);
+        var productsToLink = new EquipmentProductData[AdditionalEquipmentIds.Length];
+
+        for (int index = 0; index < AdditionalEquipmentIds.Length; index++)
+        {
+            string id = AdditionalEquipmentIds[index];
+            string assetPath = $"{ProductDataFolder}/{id}.asset";
+            string prefabPath = $"{PrefabFolder}/{id}.prefab";
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            if (prefab == null) throw new FileNotFoundException($"Prefab not found: {prefabPath}");
+
+            EquipmentProductData data = AssetDatabase.LoadAssetAtPath<EquipmentProductData>(assetPath);
+            if (data == null)
+            {
+                data = ScriptableObject.CreateInstance<EquipmentProductData>();
+                data.name = id;
+                AssetDatabase.CreateAsset(data, assetPath);
+            }
+
+            var serialized = new SerializedObject(data);
+            SerializedProperty idProperty = serialized.FindProperty("productId");
+            SerializedProperty nameProperty = serialized.FindProperty("productName");
+            SerializedProperty prefabProperty = serialized.FindProperty("modelPrefab");
+            if (idProperty == null || nameProperty == null || prefabProperty == null)
+                throw new InvalidOperationException($"Product data fields are missing for {id}.");
+
+            idProperty.stringValue = id;
+            nameProperty.stringValue = GetProductName(id);
+            prefabProperty.objectReferenceValue = prefab;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(data);
+            productsToLink[index] = data;
+            Debug.Log($"Factory equipment product data ready: {id}");
+        }
+
+        int linked = 0;
+        SelectModel[] selectors = UnityEngine.Object.FindObjectsByType<SelectModel>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (SelectModel selector in selectors)
+        {
+            var serialized = new SerializedObject(selector);
+            SerializedProperty products = serialized.FindProperty("products");
+            if (products == null || !products.isArray) continue;
+
+            bool changed = false;
+            foreach (EquipmentProductData product in productsToLink)
+            {
+                bool exists = false;
+                for (int index = 0; index < products.arraySize; index++)
+                {
+                    if (products.GetArrayElementAtIndex(index).objectReferenceValue != product) continue;
+                    exists = true;
+                    break;
+                }
+                if (exists) continue;
+
+                int newIndex = products.arraySize;
+                products.InsertArrayElementAtIndex(newIndex);
+                products.GetArrayElementAtIndex(newIndex).objectReferenceValue = product;
+                linked++;
+                changed = true;
+            }
+
+            if (!changed) continue;
+            serialized.ApplyModifiedProperties();
+            EditorUtility.SetDirty(selector);
+        }
+
+        if (linked > 0)
+        {
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if (scene.IsValid() && scene.isLoaded)
+            {
+                UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene);
+                UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene);
+            }
+        }
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditorUtility.DisplayDialog(
+            "Factory equipment",
+            $"Created or updated {productsToLink.Length} product data assets and linked {linked} model entries.",
+            "OK");
+    }
+
+    private static string GetProductName(string id)
+    {
+        switch (id)
+        {
+            case "PUMP-002": return "산업용 원심펌프";
+            case "WASHER-001": return "산업용 세탁기";
+            case "BLOWER-001": return "산업용 송풍기";
+            default: return id;
+        }
     }
 
     private static Material CreateMaterial(string id)
