@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public sealed class HierarchyPanelView : MonoBehaviour
@@ -10,15 +11,15 @@ public sealed class HierarchyPanelView : MonoBehaviour
     private const float PanelHeight = 680f;
 
     private readonly List<NodeRow> rows = new List<NodeRow>();
+    private readonly HashSet<Transform> selectedTargets = new HashSet<Transform>();
     private RectTransform content;
     private RectTransform viewport;
     private ScrollRect scrollRect;
     private TextMeshProUGUI emptyMessage;
-    private Action<Transform> onNodeSelected;
-    private Transform selectedTarget;
+    private Action<Transform, bool> onNodeSelected;
     private bool initialized;
 
-    public static HierarchyPanelView Create(Action<Transform> selectionCallback)
+    public static HierarchyPanelView Create(Action<Transform, bool> selectionCallback)
     {
         var canvasObject = new GameObject(
             "Model Hierarchy Canvas",
@@ -45,7 +46,7 @@ public sealed class HierarchyPanelView : MonoBehaviour
     public void SetModel(Transform modelRoot)
     {
         ClearRows();
-        selectedTarget = null;
+        selectedTargets.Clear();
 
         NodeData root = modelRoot != null ? BuildNodeData(modelRoot) : null;
         if (root == null)
@@ -60,15 +61,25 @@ public sealed class HierarchyPanelView : MonoBehaviour
         UpdateRowVisibility();
     }
 
-    public void SelectTarget(Transform target)
+    public void SetSelectedTargets(IEnumerable<Transform> targets, Transform activeTarget)
     {
-        selectedTarget = target;
+        selectedTargets.Clear();
+        if (targets != null)
+        {
+            foreach (Transform target in targets)
+            {
+                if (target != null)
+                    selectedTargets.Add(target);
+            }
+        }
 
+        NodeRow activeRow = null;
         for (int i = 0; i < rows.Count; i++)
         {
-            if (rows[i].Target != target)
+            if (rows[i].Target != activeTarget)
                 continue;
 
+            activeRow = rows[i];
             int parent = rows[i].ParentIndex;
             while (parent >= 0)
             {
@@ -76,16 +87,18 @@ public sealed class HierarchyPanelView : MonoBehaviour
                 parent = rows[parent].ParentIndex;
             }
 
-            UpdateRowVisibility();
-            Canvas.ForceUpdateCanvases();
-            ScrollToRow(rows[i]);
             break;
         }
 
-        UpdateSelectionColors();
+        UpdateRowVisibility();
+        if (activeRow != null)
+        {
+            Canvas.ForceUpdateCanvases();
+            ScrollToRow(activeRow);
+        }
     }
 
-    public void Initialize(Action<Transform> selectionCallback)
+    public void Initialize(Action<Transform, bool> selectionCallback)
     {
         if (initialized)
             return;
@@ -276,9 +289,10 @@ public sealed class HierarchyPanelView : MonoBehaviour
 
     private void SelectRow(NodeRow row)
     {
-        selectedTarget = row.Target;
-        UpdateSelectionColors();
-        onNodeSelected?.Invoke(row.Target);
+        Keyboard keyboard = Keyboard.current;
+        bool additiveSelection = keyboard != null
+            && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed);
+        onNodeSelected?.Invoke(row.Target, additiveSelection);
     }
 
     private void ToggleExpanded(NodeRow row)
@@ -316,7 +330,7 @@ public sealed class HierarchyPanelView : MonoBehaviour
     {
         foreach (NodeRow row in rows)
         {
-            row.LabelBackground.color = row.Target == selectedTarget
+            row.LabelBackground.color = selectedTargets.Contains(row.Target)
                 ? new Color(0.74f, 0.12f, 0.1f, 0.48f)
                 : new Color(1f, 1f, 1f, 0f);
         }
