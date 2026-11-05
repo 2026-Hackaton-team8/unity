@@ -1,0 +1,38 @@
+{
+  "equipmentCode": "PRESS-001",
+  "name": "유압 프레스",
+  "parts": [
+    {
+      "partCode": "PRESS-001-CONTROL_PANEL",
+      "name": "조작 패널"
+    },
+    {
+      "partCode": "PRESS-001-FRAME",
+      "name": "메인 프레임"
+    },
+    {
+      "partCode": "PRESS-001-HYDRAULIC_CYLINDER",
+      "name": "유압 실린더"
+    },
+    {
+      "partCode": "PRESS-001-HYDRAULIC_PIPE",
+      "name": "유압 배관"
+    },
+    {
+      "partCode": "PRESS-001-PISTON",
+      "name": "피스톤"
+    },
+    {
+      "partCode": "PRESS-001-PRESSURE_GAUGE",
+      "name": "압력 게이지"
+    },
+    {
+      "partCode": "PRESS-001-PRESS_PLATE",
+      "name": "압착 플레이트"
+    },
+    {
+      "partCode": "PRESS-001-WORK_TABLE",
+      "name": "작업대"
+    }
+  ]
+}
