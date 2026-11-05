@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class SelectModel : MonoBehaviour
 {
-    [SerializeField] private GameObject[] models;
+    [SerializeField] private EquipmentProductData[] products;
     [SerializeField] private GameObject spawnPoint;
+
+    public EquipmentProductData CurrentProduct { get; private set; }
+    public Transform CurrentModelRoot { get; private set; }
 
     [ContextMenu("Select FirstModel")]
     public void SelectFirstModel()
@@ -19,25 +22,53 @@ public class SelectModel : MonoBehaviour
             return;
         }
 
-        if (models == null || index < 0 || index >= models.Length || models[index] == null)
+        if (products == null || index < 0 || index >= products.Length || products[index] == null)
         {
-            Debug.LogWarning($"No model is configured at index {index}.", this);
+            Debug.LogWarning($"No product data is configured at index {index}.", this);
+            return;
+        }
+
+        EquipmentProductData product = products[index];
+        if (product.ModelPrefab == null)
+        {
+            Debug.LogWarning($"No model prefab is configured for product {product.ProductId}.", product);
             return;
         }
 
         ClearSpawnPoint();
 
         GameObject instance = Instantiate(
-            models[index],
+            product.ModelPrefab,
             spawnPoint.transform.position,
             spawnPoint.transform.rotation,
             spawnPoint.transform);
 
         CenterRenderBounds(instance.transform, spawnPoint.transform.position);
+        CurrentProduct = product;
+        CurrentModelRoot = instance.transform;
+    }
+
+    public bool SelectModelById(string productId)
+    {
+        if (string.IsNullOrWhiteSpace(productId) || products == null)
+            return false;
+
+        for (int i = 0; i < products.Length; i++)
+        {
+            if (products[i] == null || !string.Equals(products[i].ProductId, productId, System.StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            SelectModelByIndex(i);
+            return CurrentProduct == products[i];
+        }
+
+        return false;
     }
 
     private void ClearSpawnPoint()
     {
+        CurrentProduct = null;
+        CurrentModelRoot = null;
         Transform spawnTransform = spawnPoint.transform;
         for (int i = spawnTransform.childCount - 1; i >= 0; i--)
         {
