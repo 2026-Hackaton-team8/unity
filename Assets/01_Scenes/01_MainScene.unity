@@ -662,6 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnityWebBridge
   text: {fileID: 1749090904}
+  selectModel: {fileID: 0}
 --- !u!4 &502524496
 Transform:
   m_ObjectHideFlags: 0
@@ -690,11 +691,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectModel
   products:
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330004, type: 2}
   - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330003, type: 2}
   - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330007, type: 2}
-  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330004, type: 2}
   - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330008, type: 2}
   spawnPoint: {fileID: 1849953262}
+  hierarchyController: {fileID: 0}
 --- !u!1 &571070384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,6 +2192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldModelSelector
   spawnPoint: {fileID: 1849953263}
   hierarchyController: {fileID: 2074938210}
+  selectModel: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
