@@ -1,0 +1,46 @@
+{
+  "equipmentCode": "WASHER-001",
+  "name": "산업용 세탁기",
+  "parts": [
+    {
+      "partCode": "WASHER-001-FRAME",
+      "name": "외함 프레임"
+    },
+    {
+      "partCode": "WASHER-001-DRUM",
+      "name": "세탁 드럼"
+    },
+    {
+      "partCode": "WASHER-001-DOOR_RING",
+      "name": "도어 링"
+    },
+    {
+      "partCode": "WASHER-001-DOOR_GLASS",
+      "name": "도어 창"
+    },
+    {
+      "partCode": "WASHER-001-HINGE",
+      "name": "도어 힌지"
+    },
+    {
+      "partCode": "WASHER-001-CONTROL_PANEL",
+      "name": "제어 패널"
+    },
+    {
+      "partCode": "WASHER-001-DETERGENT_DRAWER",
+      "name": "세제 투입함"
+    },
+    {
+      "partCode": "WASHER-001-WATER_INLET",
+      "name": "급수 장치"
+    },
+    {
+      "partCode": "WASHER-001-DRAIN_HOSE",
+      "name": "배수 호스"
+    },
+    {
+      "partCode": "WASHER-001-SUPPORT_LEG",
+      "name": "지지 다리"
+    }
+  ]
+}
