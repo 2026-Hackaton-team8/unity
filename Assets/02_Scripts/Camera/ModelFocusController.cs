@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -102,6 +103,20 @@ public sealed class ModelFocusController : MonoBehaviour
 
         if (outlineController != null)
             outlineController.SetHighlighted(target);
+
+        focusedNode = target;
+        BeginFocus(bounds);
+    }
+
+    public void FocusOn(Transform target, IEnumerable<Transform> highlightedTargets)
+    {
+        if (target == null)
+            return;
+
+        Bounds bounds = GetBounds(target);
+
+        if (outlineController != null)
+            outlineController.SetHighlighted(highlightedTargets);
 
         focusedNode = target;
         BeginFocus(bounds);
