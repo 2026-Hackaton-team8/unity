@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class ModelHierarchyController : MonoBehaviour
@@ -6,6 +7,7 @@ public sealed class ModelHierarchyController : MonoBehaviour
     [SerializeField] private ModelFocusController focusController;
     [SerializeField] private HierarchyPanelView hierarchyPanel;
 
+    private readonly HashSet<Transform> selectedTargets = new HashSet<Transform>();
     private Transform currentModelRoot;
 
     private void Awake()
@@ -19,9 +21,9 @@ public sealed class ModelHierarchyController : MonoBehaviour
             hierarchyPanel = FindFirstObjectByType<HierarchyPanelView>();
 
         if (hierarchyPanel == null)
-            hierarchyPanel = HierarchyPanelView.Create(FocusHierarchyNode);
+            hierarchyPanel = HierarchyPanelView.Create(SelectFromHierarchy);
         else
-            hierarchyPanel.Initialize(FocusHierarchyNode);
+            hierarchyPanel.Initialize(SelectFromHierarchy);
     }
 
     private void LateUpdate()
@@ -31,6 +33,7 @@ public sealed class ModelHierarchyController : MonoBehaviour
             return;
 
         currentModelRoot = modelRoot;
+        selectedTargets.Clear();
         hierarchyPanel.SetModel(modelRoot);
 
         if (focusController != null)
@@ -53,21 +56,34 @@ public sealed class ModelHierarchyController : MonoBehaviour
         return null;
     }
 
-    private void FocusHierarchyNode(Transform target)
+    public void SelectFromWorld(Transform target)
     {
-        if (focusController != null)
-            focusController.FocusOn(target);
+        SelectTarget(target, false);
     }
 
-    public void SelectFromWorld(Transform target)
+    public void SelectFromWorld(Transform target, bool additiveSelection)
+    {
+        SelectTarget(target, additiveSelection);
+    }
+
+    private void SelectFromHierarchy(Transform target, bool additiveSelection)
+    {
+        SelectTarget(target, additiveSelection);
+    }
+
+    private void SelectTarget(Transform target, bool additiveSelection)
     {
         if (target == null || currentModelRoot == null)
             return;
-
         if (target != currentModelRoot && !target.IsChildOf(currentModelRoot))
             return;
 
-        hierarchyPanel.SelectTarget(target);
-        FocusHierarchyNode(target);
+        if (!additiveSelection)
+            selectedTargets.Clear();
+        selectedTargets.Add(target);
+
+        hierarchyPanel.SetSelectedTargets(selectedTargets, target);
+        if (focusController != null)
+            focusController.FocusOn(target, selectedTargets);
     }
 }
