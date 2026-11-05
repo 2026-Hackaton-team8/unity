@@ -1,0 +1,109 @@
+{
+  "equipmentId": "WASHER-001",
+  "equipmentName": "Industrial Front-Load Washer",
+  "equipmentNameKo": "산업용 세탁기",
+  "modelVersion": "1.0",
+  "units": "meters",
+  "parts": [
+    {
+      "partId": "FRAME",
+      "partName": "외함 프레임",
+      "nodeName": "PART_FRAME",
+      "faultExamples": [
+        "외함 변형",
+        "패널 진동",
+        "부식"
+      ]
+    },
+    {
+      "partId": "DRUM",
+      "partName": "세탁 드럼",
+      "nodeName": "PART_DRUM",
+      "faultExamples": [
+        "드럼 회전 불량",
+        "드럼 내벽 손상",
+        "이물질 끼임"
+      ]
+    },
+    {
+      "partId": "DOOR_RING",
+      "partName": "도어 링",
+      "nodeName": "PART_DOOR_RING",
+      "faultExamples": [
+        "도어 잠금 불량",
+        "힌지 흔들림",
+        "패킹 이탈"
+      ]
+    },
+    {
+      "partId": "DOOR_GLASS",
+      "partName": "도어 창",
+      "nodeName": "PART_DOOR_GLASS",
+      "faultExamples": [
+        "창 파손",
+        "시야 오염",
+        "누수 흔적"
+      ]
+    },
+    {
+      "partId": "HINGE",
+      "partName": "도어 힌지",
+      "nodeName": "PART_HINGE",
+      "faultExamples": [
+        "힌지 소음",
+        "힌지 처짐",
+        "체결부 풀림"
+      ]
+    },
+    {
+      "partId": "CONTROL_PANEL",
+      "partName": "제어 패널",
+      "nodeName": "PART_CONTROL_PANEL",
+      "faultExamples": [
+        "버튼 입력 불량",
+        "표시창 이상",
+        "비상 정지 불량"
+      ]
+    },
+    {
+      "partId": "DETERGENT_DRAWER",
+      "partName": "세제 투입함",
+      "nodeName": "PART_DETERGENT_DRAWER",
+      "faultExamples": [
+        "투입함 막힘",
+        "레일 걸림",
+        "세제 누수"
+      ]
+    },
+    {
+      "partId": "WATER_INLET",
+      "partName": "급수 장치",
+      "nodeName": "PART_WATER_INLET",
+      "faultExamples": [
+        "급수 지연",
+        "급수 호스 누수",
+        "밸브 작동 불량"
+      ]
+    },
+    {
+      "partId": "DRAIN_HOSE",
+      "partName": "배수 호스",
+      "nodeName": "PART_DRAIN_HOSE",
+      "faultExamples": [
+        "배수 지연",
+        "호스 누수",
+        "호스 막힘"
+      ]
+    },
+    {
+      "partId": "SUPPORT_LEG",
+      "partName": "지지 다리",
+      "nodeName": "PART_SUPPORT_LEG",
+      "faultExamples": [
+        "수평 불량",
+        "고무 받침 마모",
+        "체결부 풀림"
+      ]
+    }
+  ]
+}
