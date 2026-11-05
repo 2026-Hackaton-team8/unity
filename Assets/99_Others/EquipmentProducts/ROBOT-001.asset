@@ -15,4 +15,28 @@ MonoBehaviour:
   productId: ROBOT-001
   productName: 산업용 로봇
   modelPrefab: {fileID: 6750544037763036203, guid: 1f475ba7c786a4826ad86673e0c737e6, type: 3}
-  parts: []
+  parts:
+  - partId: "ROBOT-001:BASE"
+    partName: 회전 베이스
+    modelPath: PART_BASE
+  - partId: "ROBOT-001:ELBOW"
+    partName: 팔꿈치 관절
+    modelPath: PART_ELBOW
+  - partId: "ROBOT-001:FOREARM"
+    partName: 하부 암
+    modelPath: PART_FOREARM
+  - partId: "ROBOT-001:GRIPPER"
+    partName: 그리퍼
+    modelPath: PART_GRIPPER
+  - partId: "ROBOT-001:MOTOR_COVER"
+    partName: 모터 커버
+    modelPath: PART_MOTOR_COVER
+  - partId: "ROBOT-001:SHOULDER"
+    partName: 어깨 관절
+    modelPath: PART_SHOULDER
+  - partId: "ROBOT-001:UPPER_ARM"
+    partName: 상부 암
+    modelPath: PART_UPPER_ARM
+  - partId: "ROBOT-001:WRIST"
+    partName: 손목 관절
+    modelPath: PART_WRIST
