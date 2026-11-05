@@ -689,13 +689,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd04e9a0b7254be682cfe5f8fec9f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectModel
-  models:
-  - {fileID: 712275347506501065, guid: 54f693c27e1a14ccba44a9526ca526a8, type: 3}
-  - {fileID: 7216159204498100851, guid: 3a71e6a7eb8f34d9ca0331dfe4bf1034, type: 3}
-  - {fileID: 6492119645960457751, guid: 93eec85a0c4ae4917bba44a316d1d154, type: 3}
-  - {fileID: 6505926814554633146, guid: fbdd276470efa4580adf9b572d90e596, type: 3}
-  - {fileID: 5540830670533148136, guid: ea6e2c9166e0541f4a5aeaba7c56b755, type: 3}
-  - {fileID: 6750544037763036203, guid: 1f475ba7c786a4826ad86673e0c737e6, type: 3}
+  products:
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330004, type: 2}
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330007, type: 2}
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330005, type: 2}
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330006, type: 2}
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330008, type: 2}
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330003, type: 2}
   spawnPoint: {fileID: 1849953262}
 --- !u!1 &571070384
 GameObject:
@@ -1531,7 +1531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModelViewerCamera
   rotateSpeed: 1
-  panSpeed: 1
+  panSpeed: 10
   zoomSpeed: 0.02
   minZoom: 0.1
   maxZoom: 3
