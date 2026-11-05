@@ -690,12 +690,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectModel
   products:
-  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330004, type: 2}
-  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330007, type: 2}
-  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330005, type: 2}
-  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330006, type: 2}
-  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330008, type: 2}
   - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330003, type: 2}
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330007, type: 2}
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330004, type: 2}
+  - {fileID: 11400000, guid: 8b91c4a67d654df0b7f2017a4e330008, type: 2}
   spawnPoint: {fileID: 1849953262}
 --- !u!1 &571070384
 GameObject:
