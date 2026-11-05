@@ -15,4 +15,28 @@ MonoBehaviour:
   productId: PUMP-001
   productName: 펌프
   modelPrefab: {fileID: 5540830670533148136, guid: ea6e2c9166e0541f4a5aeaba7c56b755, type: 3}
-  parts: []
+  parts:
+  - partId: "PUMP-001:BASE_PLATE"
+    partName: 설치 베이스
+    modelPath: PART_BASE_PLATE
+  - partId: "PUMP-001:COUPLING"
+    partName: 커플링
+    modelPath: PART_COUPLING
+  - partId: "PUMP-001:ELECTRIC_MOTOR"
+    partName: 전동 모터
+    modelPath: PART_ELECTRIC_MOTOR
+  - partId: "PUMP-001:IMPELLER"
+    partName: 임펠러
+    modelPath: PART_IMPELLER
+  - partId: "PUMP-001:INLET_PIPE"
+    partName: 흡입 배관
+    modelPath: PART_INLET_PIPE
+  - partId: "PUMP-001:OUTLET_PIPE"
+    partName: 토출 배관
+    modelPath: PART_OUTLET_PIPE
+  - partId: "PUMP-001:PUMP_CASING"
+    partName: 펌프 케이싱
+    modelPath: PART_PUMP_CASING
+  - partId: "PUMP-001:SHAFT"
+    partName: 회전축
+    modelPath: PART_SHAFT
