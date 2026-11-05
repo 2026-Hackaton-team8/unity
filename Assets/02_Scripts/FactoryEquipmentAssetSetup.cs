@@ -16,6 +16,7 @@ public static class FactoryEquipmentAssetSetup
     private const string TextureFolder = "Assets/10_Textures";
     private const string MaterialFolder = "Assets/04_Materials/FactoryEquipment";
     private const string PrefabFolder = "Assets/03_Prefabs/FactoryEquipment";
+    private const string MetadataFolder = "FactoryEquipment/AdditionalEquipment/Metadata";
 
     [MenuItem("Assets/Factory Equipment/Create Materials and Prefabs")]
     private static void CreateMaterialsAndPrefabs()
@@ -76,12 +77,36 @@ public static class FactoryEquipmentAssetSetup
             SerializedProperty idProperty = serialized.FindProperty("productId");
             SerializedProperty nameProperty = serialized.FindProperty("productName");
             SerializedProperty prefabProperty = serialized.FindProperty("modelPrefab");
-            if (idProperty == null || nameProperty == null || prefabProperty == null)
+            SerializedProperty partsProperty = serialized.FindProperty("parts");
+            if (idProperty == null || nameProperty == null || prefabProperty == null || partsProperty == null)
                 throw new InvalidOperationException($"Product data fields are missing for {id}.");
 
+            EquipmentMetadata metadata = LoadMetadata(id);
+            if (metadata.parts == null || metadata.parts.Length == 0)
+                throw new InvalidDataException($"No part metadata was found for {id}.");
+
             idProperty.stringValue = id;
-            nameProperty.stringValue = GetProductName(id);
+            nameProperty.stringValue = string.IsNullOrWhiteSpace(metadata.equipmentNameKo)
+                ? GetProductName(id)
+                : metadata.equipmentNameKo;
             prefabProperty.objectReferenceValue = prefab;
+            partsProperty.arraySize = metadata.parts.Length;
+            for (int partIndex = 0; partIndex < metadata.parts.Length; partIndex++)
+            {
+                PartMetadata sourcePart = metadata.parts[partIndex];
+                if (sourcePart == null
+                    || string.IsNullOrWhiteSpace(sourcePart.partId)
+                    || string.IsNullOrWhiteSpace(sourcePart.partName)
+                    || string.IsNullOrWhiteSpace(sourcePart.nodeName))
+                {
+                    throw new InvalidDataException($"Part metadata {partIndex} is incomplete for {id}.");
+                }
+
+                SerializedProperty part = partsProperty.GetArrayElementAtIndex(partIndex);
+                part.FindPropertyRelative("partId").stringValue = $"{id}:{sourcePart.partId}";
+                part.FindPropertyRelative("partName").stringValue = sourcePart.partName;
+                part.FindPropertyRelative("modelPath").stringValue = sourcePart.nodeName;
+            }
             serialized.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(data);
             productsToLink[index] = data;
@@ -147,6 +172,36 @@ public static class FactoryEquipmentAssetSetup
             case "BLOWER-001": return "산업용 송풍기";
             default: return id;
         }
+    }
+
+    private static EquipmentMetadata LoadMetadata(string equipmentId)
+    {
+        string projectRoot = Directory.GetParent(Application.dataPath).FullName;
+        string path = Path.Combine(projectRoot, MetadataFolder, equipmentId + ".json");
+        if (!File.Exists(path))
+            throw new FileNotFoundException($"Equipment part metadata was not found: {path}");
+
+        EquipmentMetadata metadata = JsonUtility.FromJson<EquipmentMetadata>(File.ReadAllText(path));
+        if (metadata == null || !string.Equals(metadata.equipmentId, equipmentId, StringComparison.Ordinal))
+            throw new InvalidDataException($"Equipment ID in metadata does not match {equipmentId}.");
+
+        return metadata;
+    }
+
+    [Serializable]
+    private sealed class EquipmentMetadata
+    {
+        public string equipmentId;
+        public string equipmentNameKo;
+        public PartMetadata[] parts;
+    }
+
+    [Serializable]
+    private sealed class PartMetadata
+    {
+        public string partId;
+        public string partName;
+        public string nodeName;
     }
 
     private static Material CreateMaterial(string id)
