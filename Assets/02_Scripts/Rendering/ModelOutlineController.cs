@@ -15,6 +15,30 @@ public sealed class ModelOutlineController : MonoBehaviour
         if (target == null)
             return;
 
+        AddHighlightedTarget(target, new HashSet<Renderer>());
+    }
+
+    public void SetHighlighted(IEnumerable<Transform> targets)
+    {
+        Clear();
+        if (targets == null)
+            return;
+        if (outlineMaterial == null || outlineMaskMaterial == null)
+        {
+            Debug.LogWarning("ModelOutlineController needs outline and silhouette-mask materials.", this);
+            return;
+        }
+
+        var highlightedRenderers = new HashSet<Renderer>();
+        foreach (Transform target in targets)
+        {
+            if (target != null)
+                AddHighlightedTarget(target, highlightedRenderers);
+        }
+    }
+
+    private void AddHighlightedTarget(Transform target, HashSet<Renderer> highlightedRenderers)
+    {
         if (outlineMaterial == null || outlineMaskMaterial == null)
         {
             Debug.LogWarning("ModelOutlineController needs outline and silhouette-mask materials.", this);
@@ -24,7 +48,7 @@ public sealed class ModelOutlineController : MonoBehaviour
         Renderer[] renderers = target.GetComponentsInChildren<Renderer>(false);
         foreach (Renderer sourceRenderer in renderers)
         {
-            if (sourceRenderer == null || !sourceRenderer.enabled)
+            if (sourceRenderer == null || !sourceRenderer.enabled || !highlightedRenderers.Add(sourceRenderer))
                 continue;
             if ((sourceRenderer.gameObject.hideFlags & HideFlags.HideInHierarchy) != 0)
                 continue;
