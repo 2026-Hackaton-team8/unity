@@ -1,0 +1,38 @@
+{
+  "equipmentCode": "CNC-001",
+  "name": "CNC 가공기",
+  "parts": [
+    {
+      "partCode": "CNC-001-CONTROL_PANEL",
+      "name": "제어 패널"
+    },
+    {
+      "partCode": "CNC-001-COOLING_UNIT",
+      "name": "냉각 장치"
+    },
+    {
+      "partCode": "CNC-001-DOOR",
+      "name": "전면 보호 도어"
+    },
+    {
+      "partCode": "CNC-001-FRAME",
+      "name": "본체 프레임"
+    },
+    {
+      "partCode": "CNC-001-GUIDE_RAIL",
+      "name": "이송 레일"
+    },
+    {
+      "partCode": "CNC-001-SPINDLE",
+      "name": "스핀들"
+    },
+    {
+      "partCode": "CNC-001-TOOL_HOLDER",
+      "name": "공구 홀더"
+    },
+    {
+      "partCode": "CNC-001-WORK_TABLE",
+      "name": "작업 테이블"
+    }
+  ]
+}
