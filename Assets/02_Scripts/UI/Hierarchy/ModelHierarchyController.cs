@@ -28,6 +28,11 @@ public sealed class ModelHierarchyController : MonoBehaviour
 
     private void LateUpdate()
     {
+        RefreshCurrentModel();
+    }
+
+    private void RefreshCurrentModel()
+    {
         Transform modelRoot = FindActiveModelRoot();
         if (modelRoot == currentModelRoot)
             return;
@@ -64,6 +69,18 @@ public sealed class ModelHierarchyController : MonoBehaviour
     public void SelectFromWorld(Transform target, bool additiveSelection)
     {
         SelectTarget(target, additiveSelection);
+    }
+
+    public bool SelectFromExternal(Transform target)
+    {
+        RefreshCurrentModel();
+        if (target == null || currentModelRoot == null)
+            return false;
+        if (target != currentModelRoot && !target.IsChildOf(currentModelRoot))
+            return false;
+
+        SelectTarget(target, false);
+        return true;
     }
 
     private void SelectFromHierarchy(Transform target, bool additiveSelection)
