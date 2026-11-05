@@ -1,0 +1,99 @@
+{
+  "equipmentId": "BLOWER-001",
+  "equipmentName": "Industrial Centrifugal Blower",
+  "equipmentNameKo": "산업용 송풍기",
+  "modelVersion": "1.0",
+  "units": "meters",
+  "parts": [
+    {
+      "partId": "BASE_FRAME",
+      "partName": "설치 프레임",
+      "nodeName": "PART_BASE_FRAME",
+      "faultExamples": [
+        "프레임 균열",
+        "앵커 풀림",
+        "수평 불량"
+      ]
+    },
+    {
+      "partId": "BLOWER_HOUSING",
+      "partName": "송풍기 케이싱",
+      "nodeName": "PART_BLOWER_HOUSING",
+      "faultExamples": [
+        "케이싱 진동",
+        "공기 누설",
+        "부식"
+      ]
+    },
+    {
+      "partId": "IMPELLER",
+      "partName": "임펠러",
+      "nodeName": "PART_IMPELLER",
+      "faultExamples": [
+        "임펠러 오염",
+        "날개 손상",
+        "회전 불균형"
+      ]
+    },
+    {
+      "partId": "ELECTRIC_MOTOR",
+      "partName": "전동 모터",
+      "nodeName": "PART_ELECTRIC_MOTOR",
+      "faultExamples": [
+        "모터 과열",
+        "베어링 소음",
+        "절연 저하"
+      ]
+    },
+    {
+      "partId": "SHAFT",
+      "partName": "구동축",
+      "nodeName": "PART_SHAFT",
+      "faultExamples": [
+        "축 흔들림",
+        "축 마모",
+        "커플링 정렬 불량"
+      ]
+    },
+    {
+      "partId": "INLET_GUARD",
+      "partName": "흡입구 보호망",
+      "nodeName": "PART_INLET_GUARD",
+      "faultExamples": [
+        "보호망 변형",
+        "흡입구 막힘",
+        "체결부 풀림"
+      ]
+    },
+    {
+      "partId": "OUTLET_DUCT",
+      "partName": "토출 덕트",
+      "nodeName": "PART_OUTLET_DUCT",
+      "faultExamples": [
+        "덕트 누설",
+        "토출 막힘",
+        "연결부 진동"
+      ]
+    },
+    {
+      "partId": "PRESSURE_GAUGE",
+      "partName": "차압계",
+      "nodeName": "PART_PRESSURE_GAUGE",
+      "faultExamples": [
+        "지침 고착",
+        "표시 이상",
+        "계기 파손"
+      ]
+    },
+    {
+      "partId": "CONTROL_BOX",
+      "partName": "제어함",
+      "nodeName": "PART_CONTROL_BOX",
+      "faultExamples": [
+        "배선 손상",
+        "단자 과열",
+        "커버 체결 불량"
+      ]
+    }
+  ]
+}
