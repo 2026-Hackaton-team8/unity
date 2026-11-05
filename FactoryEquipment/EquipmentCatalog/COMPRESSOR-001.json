@@ -1,0 +1,38 @@
+{
+  "equipmentCode": "COMPRESSOR-001",
+  "name": "컴프레서",
+  "parts": [
+    {
+      "partCode": "COMPRESSOR-001-AIR_PIPE",
+      "name": "공기 배관"
+    },
+    {
+      "partCode": "COMPRESSOR-001-AIR_TANK",
+      "name": "공기 저장 탱크"
+    },
+    {
+      "partCode": "COMPRESSOR-001-COMPRESSOR_HEAD",
+      "name": "압축기 헤드"
+    },
+    {
+      "partCode": "COMPRESSOR-001-CONTROL_BOX",
+      "name": "제어 박스"
+    },
+    {
+      "partCode": "COMPRESSOR-001-COOLING_FAN",
+      "name": "냉각 팬"
+    },
+    {
+      "partCode": "COMPRESSOR-001-MOTOR",
+      "name": "전동 모터"
+    },
+    {
+      "partCode": "COMPRESSOR-001-PRESSURE_GAUGE",
+      "name": "압력계"
+    },
+    {
+      "partCode": "COMPRESSOR-001-SAFETY_VALVE",
+      "name": "안전 밸브"
+    }
+  ]
+}
