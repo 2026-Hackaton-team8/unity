@@ -1,0 +1,109 @@
+{
+  "equipmentId": "PUMP-002",
+  "equipmentName": "Industrial Centrifugal Pump",
+  "equipmentNameKo": "산업용 원심펌프",
+  "modelVersion": "1.0",
+  "units": "meters",
+  "parts": [
+    {
+      "partId": "BASE_PLATE",
+      "partName": "설치 베이스",
+      "nodeName": "PART_BASE_PLATE",
+      "faultExamples": [
+        "앵커 볼트 풀림",
+        "베이스 균열",
+        "과도한 진동"
+      ]
+    },
+    {
+      "partId": "ELECTRIC_MOTOR",
+      "partName": "전동 모터",
+      "nodeName": "PART_ELECTRIC_MOTOR",
+      "faultExamples": [
+        "과열",
+        "비정상 소음",
+        "절연 저하"
+      ]
+    },
+    {
+      "partId": "COUPLING",
+      "partName": "커플링",
+      "nodeName": "PART_COUPLING",
+      "faultExamples": [
+        "정렬 불량",
+        "커플링 마모",
+        "비정상 진동"
+      ]
+    },
+    {
+      "partId": "SHAFT",
+      "partName": "회전축",
+      "nodeName": "PART_SHAFT",
+      "faultExamples": [
+        "축 마모",
+        "축 휨",
+        "베어링 소음"
+      ]
+    },
+    {
+      "partId": "PUMP_CASING",
+      "partName": "펌프 케이싱",
+      "nodeName": "PART_PUMP_CASING",
+      "faultExamples": [
+        "케이싱 누수",
+        "부식",
+        "균열"
+      ]
+    },
+    {
+      "partId": "IMPELLER",
+      "partName": "임펠러",
+      "nodeName": "PART_IMPELLER",
+      "faultExamples": [
+        "임펠러 마모",
+        "이물질 막힘",
+        "캐비테이션 흔적"
+      ]
+    },
+    {
+      "partId": "INLET_PIPE",
+      "partName": "흡입 배관",
+      "nodeName": "PART_INLET_PIPE",
+      "faultExamples": [
+        "흡입 압력 저하",
+        "플랜지 누수",
+        "배관 막힘"
+      ]
+    },
+    {
+      "partId": "OUTLET_PIPE",
+      "partName": "토출 배관",
+      "nodeName": "PART_OUTLET_PIPE",
+      "faultExamples": [
+        "토출 압력 저하",
+        "배관 누수",
+        "밸브 작동 불량"
+      ]
+    },
+    {
+      "partId": "PRESSURE_GAUGE",
+      "partName": "압력계",
+      "nodeName": "PART_PRESSURE_GAUGE",
+      "faultExamples": [
+        "지침 고착",
+        "계기 파손",
+        "압력 표시 이상"
+      ]
+    },
+    {
+      "partId": "CONTROL_BOX",
+      "partName": "단자함",
+      "nodeName": "PART_CONTROL_BOX",
+      "faultExamples": [
+        "단자 과열",
+        "배선 손상",
+        "커버 체결 불량"
+      ]
+    }
+  ]
+}
