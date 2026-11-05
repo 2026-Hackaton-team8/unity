@@ -15,4 +15,28 @@ MonoBehaviour:
   productId: CNC-001
   productName: CNC 가공기
   modelPrefab: {fileID: 712275347506501065, guid: 54f693c27e1a14ccba44a9526ca526a8, type: 3}
-  parts: []
+  parts:
+  - partId: "CNC-001:CONTROL_PANEL"
+    partName: 제어 패널
+    modelPath: PART_CONTROL_PANEL
+  - partId: "CNC-001:COOLING_UNIT"
+    partName: 냉각 장치
+    modelPath: PART_COOLING_UNIT
+  - partId: "CNC-001:DOOR"
+    partName: 전면 보호 도어
+    modelPath: PART_DOOR
+  - partId: "CNC-001:FRAME"
+    partName: 본체 프레임
+    modelPath: PART_FRAME
+  - partId: "CNC-001:GUIDE_RAIL"
+    partName: 이송 레일
+    modelPath: PART_GUIDE_RAIL
+  - partId: "CNC-001:SPINDLE"
+    partName: 스핀들
+    modelPath: PART_SPINDLE
+  - partId: "CNC-001:TOOL_HOLDER"
+    partName: 공구 홀더
+    modelPath: PART_TOOL_HOLDER
+  - partId: "CNC-001:WORK_TABLE"
+    partName: 작업 테이블
+    modelPath: PART_WORK_TABLE
