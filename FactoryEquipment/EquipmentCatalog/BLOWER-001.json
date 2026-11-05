@@ -1,0 +1,42 @@
+{
+  "equipmentCode": "BLOWER-001",
+  "name": "산업용 송풍기",
+  "parts": [
+    {
+      "partCode": "BLOWER-001-BASE_FRAME",
+      "name": "설치 프레임"
+    },
+    {
+      "partCode": "BLOWER-001-BLOWER_HOUSING",
+      "name": "송풍기 케이싱"
+    },
+    {
+      "partCode": "BLOWER-001-IMPELLER",
+      "name": "임펠러"
+    },
+    {
+      "partCode": "BLOWER-001-ELECTRIC_MOTOR",
+      "name": "전동 모터"
+    },
+    {
+      "partCode": "BLOWER-001-SHAFT",
+      "name": "구동축"
+    },
+    {
+      "partCode": "BLOWER-001-INLET_GUARD",
+      "name": "흡입구 보호망"
+    },
+    {
+      "partCode": "BLOWER-001-OUTLET_DUCT",
+      "name": "토출 덕트"
+    },
+    {
+      "partCode": "BLOWER-001-PRESSURE_GAUGE",
+      "name": "차압계"
+    },
+    {
+      "partCode": "BLOWER-001-CONTROL_BOX",
+      "name": "제어함"
+    }
+  ]
+}
