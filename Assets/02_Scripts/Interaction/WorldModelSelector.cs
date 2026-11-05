@@ -37,7 +37,13 @@ public sealed class WorldModelSelector : MonoBehaviour
         Ray ray = selectionCamera.ScreenPointToRay(mouse.position.ReadValue());
         Transform hitTarget = FindClosestRenderer(ray);
         if (hitTarget != null && hierarchyController != null)
-            hierarchyController.SelectFromWorld(hitTarget);
+            hierarchyController.SelectFromWorld(hitTarget, IsShiftHeld());
+    }
+
+    private static bool IsShiftHeld()
+    {
+        Keyboard keyboard = Keyboard.current;
+        return keyboard != null && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed);
     }
 
     private void RefreshModelRenderers()
