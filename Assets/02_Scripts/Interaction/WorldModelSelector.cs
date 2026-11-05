@@ -8,6 +8,7 @@ public sealed class WorldModelSelector : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private ModelHierarchyController hierarchyController;
+    [SerializeField] private SelectModel selectModel;
 
     private Camera selectionCamera;
     private Transform currentModelRoot;
@@ -18,6 +19,8 @@ public sealed class WorldModelSelector : MonoBehaviour
     private void Awake()
     {
         selectionCamera = Camera.main;
+        if (selectModel == null)
+            selectModel = FindFirstObjectByType<SelectModel>();
     }
 
     private void LateUpdate()
@@ -36,8 +39,16 @@ public sealed class WorldModelSelector : MonoBehaviour
 
         Ray ray = selectionCamera.ScreenPointToRay(mouse.position.ReadValue());
         Transform hitTarget = FindClosestRenderer(ray);
-        if (hitTarget != null && hierarchyController != null)
+        if (hitTarget == null)
+            return;
+
+        if (hierarchyController != null)
             hierarchyController.SelectFromWorld(hitTarget, IsShiftHeld());
+
+        if (selectModel != null && selectModel.TryGetPartForTransform(hitTarget, out EquipmentPartData part))
+            Debug.Log($"Clicked part: id={part.PartId}, name={part.PartName}", hitTarget);
+        else
+            Debug.Log($"Clicked model node '{hitTarget.name}' has no registered part ID.", hitTarget);
     }
 
     private static bool IsShiftHeld()
