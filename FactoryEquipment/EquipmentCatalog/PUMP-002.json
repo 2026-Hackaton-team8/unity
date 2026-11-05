@@ -1,0 +1,46 @@
+{
+  "equipmentCode": "PUMP-002",
+  "name": "산업용 원심펌프",
+  "parts": [
+    {
+      "partCode": "PUMP-002-BASE_PLATE",
+      "name": "설치 베이스"
+    },
+    {
+      "partCode": "PUMP-002-ELECTRIC_MOTOR",
+      "name": "전동 모터"
+    },
+    {
+      "partCode": "PUMP-002-COUPLING",
+      "name": "커플링"
+    },
+    {
+      "partCode": "PUMP-002-SHAFT",
+      "name": "회전축"
+    },
+    {
+      "partCode": "PUMP-002-PUMP_CASING",
+      "name": "펌프 케이싱"
+    },
+    {
+      "partCode": "PUMP-002-IMPELLER",
+      "name": "임펠러"
+    },
+    {
+      "partCode": "PUMP-002-INLET_PIPE",
+      "name": "흡입 배관"
+    },
+    {
+      "partCode": "PUMP-002-OUTLET_PIPE",
+      "name": "토출 배관"
+    },
+    {
+      "partCode": "PUMP-002-PRESSURE_GAUGE",
+      "name": "압력계"
+    },
+    {
+      "partCode": "PUMP-002-CONTROL_BOX",
+      "name": "단자함"
+    }
+  ]
+}
